@@ -70,8 +70,6 @@ function pullChanges(){
 
 app.use( express.static(__dirname+'/www') )
 
-startChromium()
-
 io.on('connection',function(socket){
     socket.on('download-latest-images',()=>downloadImagesFromGdrive(socket))
     socket.on('run-updates',pullChanges)
@@ -87,5 +85,8 @@ io.on('connection',function(socket){
 
 http.listen( port, function(err){
     if(err) console.log(err)
-    else statusLog(`server is listening, visit http://localhost:${port}`)
+    else {
+        statusLog(`server is listening, visit http://localhost:${port}`)
+        startChromium()
+    }
 })
