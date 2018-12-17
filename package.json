@@ -1,0 +1,24 @@
+{
+  "name": "rpi_slideshow",
+  "version": "1.0.0",
+  "description": "slide show server for raspberry pi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbriz/rpi_slideshow.git"
+  },
+  "author": "Nick Briz <nbriz@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nbriz/rpi_slideshow/issues"
+  },
+  "homepage": "https://github.com/nbriz/rpi_slideshow#readme",
+  "dependencies": {
+    "chokidar": "^2.0.4",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
