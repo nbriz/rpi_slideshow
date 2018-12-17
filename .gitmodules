@@ -1,0 +1,3 @@
+[submodule "gdrive_frame"]
+	path = gdrive_frame
+	url = https://github.com/brizandrew/gdrive_frame.git
