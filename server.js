@@ -50,6 +50,11 @@ function restartApp(){
     exec(`pm2 restart server`, execLog)
 }
 
+function quitApp(){
+    statusLog('stopping app')
+    exec(`pm2 stop server`, execLog)
+}
+
 function restartComputer(){
     statusLog('restarting computer')
     exec(`reboot`, execLog)
@@ -71,6 +76,7 @@ io.on('connection',function(socket){
     socket.on('download-latest-images',()=>downloadImagesFromGdrive(socket))
     socket.on('run-updates',pullChanges)
     socket.on('restart-app',restartApp)
+    socket.on('quit-app',quitApp)
     socket.on('restart-computer',restartComputer)
     watcher.on('add',(path,stats)=>{
         let pathArr = path.split('/')

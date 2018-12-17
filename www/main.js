@@ -26,7 +26,11 @@ function setup(){
     document.body.appendChild( gui )
     createButton(gui,'run-updates')
     createButton(gui,'restart-app')
+    createButton(gui,'quit-app')
     createButton(gui,'restart-computer')
+    createButton(gui,'close-menu',()=>{
+        gui.style.display = "none"
+    })
 
     // setup socket listeners
     socket.on('new-image',(filename)=>loadImage(filename))
@@ -56,12 +60,16 @@ function applyCSS(element,cssObj){
     for(prop in cssObj) element.style[prop] = cssObj[prop]
 }
 
-function createButton(gui,name){
+function createButton(gui,name,clickEvent){
     let div = document.createElement('div')
-    div.addEventListener('click',()=>{
-        socket.emit(name)
-        gui.style.display = 'none'
-    })
+    if(clickEvent){
+        div.addEventListener('click',clickEvent)
+    } else {
+        div.addEventListener('click',()=>{
+            socket.emit(name)
+            gui.style.display = 'none'
+        })
+    }
     div.textContent = name
     applyCSS(div,{
         color:'#fff', backgroundColor:'#c40477', textAlign:'center',
