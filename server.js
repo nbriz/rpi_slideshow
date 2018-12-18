@@ -52,6 +52,11 @@ function restartComputer(){
     exec(`reboot`, execLog)
 }
 
+function powerOff(){
+    statusLog('shutting down computer')
+    exec(`poweroff`, execLog)
+}
+
 function pullChanges(){
     statusLog('pulling updates')
     exec(`cd ${__dirname} ; git pull origin master`, execLog)
@@ -68,6 +73,7 @@ io.on('connection',function(socket){
     socket.on('restart-app',restartApp)
     socket.on('quit-app',quitApp)
     socket.on('restart-computer',restartComputer)
+    socket.on('poweroff',powerOff)
     watcher.on('add',(path,stats)=>{
         let pathArr = path.split('/')
         let filename = pathArr[pathArr.length-1]

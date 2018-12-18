@@ -28,6 +28,7 @@ function setup(){
     createButton(gui,'restart-app')
     createButton(gui,'quit-app')
     createButton(gui,'restart-computer')
+    createButton(gui,'poweroff')
     createButton(gui,'close-menu',()=>{
         gui.style.display = "none"
     })
