@@ -1,5 +1,4 @@
 const { exec } = require('child_process')
-const fs = require('fs')
 const gdrive = require("./gdrive_frame/dist").default
 const express = require('express')
 const app = express()
@@ -34,15 +33,8 @@ function startChromium(log){
 }
 
 function downloadImagesFromGdrive(socket){
-    let path = `${__dirname}/www/downloads`
-    gdrive(path)
-    // TODO run in callback or promise instead of timeout, ex:
-    // gdrive(path).then((files)=>socket.emit('images-downloaded',files))
-    setTimeout(()=>{
-        let filenames = []
-        fs.readdirSync(path).forEach(img=>filenames.push(img))
-        socket.emit('images-downloaded',filenames)
-    },3000)
+    gdrive(`${__dirname}/www/downloads`)
+    .then((files)=>socket.emit('images-downloaded',files))
 }
 
 function restartApp(){
