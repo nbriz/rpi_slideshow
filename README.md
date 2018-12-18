@@ -14,7 +14,12 @@ this has been tested to work w/the following hardware (but obviously, slight var
 # raspberry pi setup
 
 ### Write Raspbian Image to SD card
-[download raspbian](https://www.raspberrypi.org/downloads/raspbian/). b/c i'm on Ubuntu i just used the easy-peasy [Startup Disk Creator](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-ubuntu#0) to get it on a card, but other instructions can be found [on the raspberry pi site](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
+[download raspbian](https://www.raspberrypi.org/downloads/raspbian/) (i went with
+"Raspbian Stretch with desktop"). b/c i'm on Ubuntu i just used the easy-peasy [Startup Disk Creator](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-ubuntu#0) to get it on a card, but other instructions can be found [on the raspberry pi site](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
+
+keep in mind u'll need not only a keyboard/mouse but also a screen u can plug into the PI's HDMI port (the little screen won't work until after the next step).
+
+also make sure u've got the WiFi dongle plugged in. when u boot up the Pi for the first time it'll run u through a welcome wizard (this will include setting up the WiFi if the dongle is in). This process will end by asking u to reboot, **NOTE:** for me the WiFi doesn't work until after this initial reboot.
 
 ### Run PiTFT install script
 As documented in the [adafruit tutorial](https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/easy-install-2) in order to get the PiTFT screen working u've got to run the following:
@@ -22,13 +27,14 @@ As documented in the [adafruit tutorial](https://learn.adafruit.com/adafruit-pit
 cd ~
 wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
 chmod +x adafruit-pitft.sh
+sudo ./adafruit-pitft.sh
 ```
 then just follow the instructions:
 - choose '1' for 'select configuration' (assuming u've got the screen mentioned above)
 - choose '1' again for rotation
 - when it asks 'Would you like the console to appear on the PiTFT display' say no
 - when it asks 'Would you like the HDMI display to mirror to the PiTFT display?' i'd say yes to dev on a second monitor (that tiny 2.8" screen's not the best for deving)
-- reboot.
+- reboot (or finish the rest of the steps first, which i'd recommend)
 
 ### Install latest NodeJS/NPM
 
@@ -61,7 +67,7 @@ then install the root project's dependencies
 cd ../
 npm install
 ```
-then test it all out by running
+then test it all out by running. if u currently have chromium open (say b/c u're following this tutorial) it won't launch in kiosk mode. u'll have to quit chromium before running the server to see it launch in kiosk mode.
 ```
 node server
 ```
@@ -80,6 +86,10 @@ then, assuming ur in the rpi_slideshow directory, create the service
 ```
 pm2 start server.js
 ```
+u can stop the service at any time by running:
+```
+pm2 stop server
+```
 then make sure pm2 itself starts on startup, if u run `pm2 startup` it will tell u to run:
 ```
 sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
@@ -87,4 +97,4 @@ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -
 
 ### install TeamViewer
 
-for remote access i installed [TeamViewer's Host for Raspberry Pi](https://www.teamviewer.com/en/download/linux/)
+for remote access i installed [TeamViewer's Host for Raspberry Pi](https://www.teamviewer.com/en/download/linux/). u'll need to have created a TeamViewer account beforehand in order to grant u're account "easy access" to the Pi
