@@ -3,6 +3,7 @@ const gui = document.createElement('section')
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
 const timer = { index:0, interval:0, speed:0.1 }
+const dlInterval = 10*60*1000 // ping gdrive every x miliseconds
 let imgs = []
 
 setup()
@@ -41,7 +42,7 @@ function setup(){
 
     // get things rolling
     socket.emit('download-latest-images') // to downloads folder
-    downloadImagesAgainIn(5000)
+    downloadImagesAgainIn(dlInterval)
     resize()
     draw()
 }
