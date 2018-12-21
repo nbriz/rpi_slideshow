@@ -2,6 +2,8 @@
 
 raspberry pi picture frame that creates a slide-show from images in google drive. This repo includes [gdrive_frame](https://github.com/brizandrew/gdrive_frame) as a [submodule](https://blog.github.com/2016-02-01-working-with-submodules/). Below are instructions for setting up a raspberry pi for use w/this repo.
 
+![Briz Bros Feed Frame](pic.jpg)
+
 # Hardware requirements
 this has been tested to work w/the following hardware (but obviously, slight variations should work... i imagine):
 - 8GB - 32GB MicroSD Card
