@@ -6,7 +6,7 @@ raspberry pi picture frame that creates a slide-show from images in google drive
 this has been tested to work w/the following hardware (but obviously, slight variations should work... i imagine):
 - 8GB - 32GB MicroSD Card
 - [Raspberry Pi 3](https://www.adafruit.com/product/3055)
-- [Raspberry Pi 3 Power Adapter](https://www.amazon.com/gp/product/B00MARDJZ4/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1)
+- [Raspberry Pi 3 Power Adapter](https://www.adafruit.com/product/1995)
 - [PiTFT 320x240 2.8" Resistive Touchscreen](https://www.adafruit.com/product/2298)
 - [USB WiFi Dongle](https://www.amazon.com/gp/product/B018LHT6R6/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 - [Case Base and Faceplate Pack](https://www.adafruit.com/product/3062) (optional)
@@ -55,7 +55,7 @@ git clone --recursive https://github.com/nbriz/rpi_slideshow.git
 ```
 then cd into the gdrive_frame submodule && install the dependencies
 ```
-cd gdrive_frame
+cd rpi_slideshow/gdrive_frame
 npm install --only=prod
 ```
 then as per the gdrive_frame [README instructions](https://github.com/brizandrew/gdrive_frame), copy the .env template && edit to include ur credz:
