@@ -6,6 +6,8 @@ const timer = { index:0, interval:0, speed:0.1 }
 const dlInterval = 10*60*1000 // ping gdrive every x miliseconds
 let imgs = []
 
+socket.on('init',(args)=>alert(args))
+
 setup()
 
 function setup(){

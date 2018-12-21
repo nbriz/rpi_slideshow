@@ -10,6 +10,7 @@ const watcher = chokidar.watch(`${__dirname}/www/downloads`, {
   ignored: /[\/\\]\./, persistent: true, ignoreInitial:true
 })
 
+let args = process.argv
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
 
@@ -79,6 +80,7 @@ io.on('connection',function(socket){
         let filename = pathArr[pathArr.length-1]
         socket.emit('new-image',filename)
     })
+    socket.emit('init',args)
 })
 
 http.listen( port, function(err){
