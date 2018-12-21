@@ -71,8 +71,7 @@ then test it all out by running. if u currently have chromium open (say b/c u're
 ```
 node server
 ```
-then alt-tab ur way back to the terminal to `cntrl+c` the process.
-**NOTE:** some of the menu items in the app like restart-app && quit-app assume u're running the app as a pm2 process (ie. those particular menu items won't work until u've completed the next step)
+then alt-tab ur way back to the terminal to `cntrl+c` the process. (or click the quit-app button in the GUI)
 
 ### setup pm2 service
 

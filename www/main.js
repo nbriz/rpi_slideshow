@@ -6,11 +6,9 @@ const timer = { index:0, interval:0, speed:0.1 }
 const dlInterval = 10*60*1000 // ping gdrive every x miliseconds
 let imgs = []
 
-socket.on('init',(args)=>alert(args))
+socket.on('init',(arg)=>setup(arg))
 
-setup()
-
-function setup(){
+function setup(arg){
     // setup canvas
     applyCSS(canvas,{
         position:"absolute", left:"0px", top:"0px", zIndex:"1"
@@ -28,7 +26,7 @@ function setup(){
     })
     document.body.appendChild( gui )
     createButton(gui,'run-updates')
-    createButton(gui,'restart-app')
+    if(arg.includes('pm2')) createButton(gui,'restart-app')
     createButton(gui,'quit-app')
     createButton(gui,'restart-computer')
     createButton(gui,'poweroff')

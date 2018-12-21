@@ -9,8 +9,8 @@ const chokidar = require('chokidar')
 const watcher = chokidar.watch(`${__dirname}/www/downloads`, {
   ignored: /[\/\\]\./, persistent: true, ignoreInitial:true
 })
+let arg = process.argv[1]
 
-let args = process.argv
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
 
@@ -45,7 +45,8 @@ function restartApp(){
 
 function quitApp(){
     statusLog('stopping app')
-    exec(`pm2 stop server`, execLog)
+    if( arg.includes('pm2') ) exec(`pm2 stop server`, execLog)
+    else process.exit()
 }
 
 function restartComputer(){
@@ -69,6 +70,7 @@ function pullChanges(){
 app.use( express.static(__dirname+'/www') )
 
 io.on('connection',function(socket){
+    socket.emit('init',arg)
     socket.on('download-latest-images',()=>downloadImagesFromGdrive(socket))
     socket.on('run-updates',pullChanges)
     socket.on('restart-app',restartApp)
@@ -80,7 +82,6 @@ io.on('connection',function(socket){
         let filename = pathArr[pathArr.length-1]
         socket.emit('new-image',filename)
     })
-    socket.emit('init',args)
 })
 
 http.listen( port, function(err){
