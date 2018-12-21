@@ -10,6 +10,8 @@ const watcher = chokidar.watch(`${__dirname}/www/downloads`, {
   ignored: /[\/\\]\./, persistent: true, ignoreInitial:true
 })
 let arg = process.argv[1]
+let cp // chromium process
+process.on('exit',()=>cp.kill())
 
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
@@ -30,7 +32,7 @@ function statusLog(str){
 
 function startChromium(log){
     statusLog('launching chromium')
-    exec(`chromium-browser --kiosk http://localhost:${port}`, execLog)
+    cp = exec(`chromium-browser --kiosk http://localhost:${port}`, execLog)
 }
 
 function downloadImagesFromGdrive(socket){
