@@ -97,3 +97,7 @@ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -
 ### install TeamViewer
 
 for remote access i installed [TeamViewer's Host for Raspberry Pi](https://www.teamviewer.com/en/download/linux/). u'll need to have created a TeamViewer account beforehand in order to grant u're account "easy access" to the Pi
+
+# debugging
+
+when run via `node server` (or `node server dev` to avoid kiosk mode), rather than `pm2 start server`, u'll have access to lots of logging in the terminal. so if/when we need to debug the app it should be launched that way.

@@ -4,14 +4,16 @@ const express = require('express')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
-const port = process.argv[2] || 8000
+const port = 8000
 const chokidar = require('chokidar')
 const watcher = chokidar.watch(`${__dirname}/www/downloads`, {
   ignored: /[\/\\]\./, persistent: true, ignoreInitial:true
 })
+
 let arg = process.argv[1]
-let cp // chromium process
-process.on('exit',()=>cp.kill())
+let dev = process.argv[2]
+let chromProc // chromium process
+process.on('exit',()=>chromProc.kill())
 
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
 // ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _ . ~ * ~ . _
@@ -32,7 +34,9 @@ function statusLog(str){
 
 function startChromium(log){
     statusLog('launching chromium')
-    cp = exec(`chromium-browser --kiosk http://localhost:${port}`, execLog)
+    let cmd = (dev) ? `chromium-browser http://localhost:${port}` :
+        `chromium-browser --kiosk http://localhost:${port}`
+    chromProc = exec(cmd, execLog)
 }
 
 function downloadImagesFromGdrive(socket){
