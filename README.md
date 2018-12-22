@@ -10,7 +10,7 @@ this has been tested to work w/the following hardware (but obviously, slight var
 - [Raspberry Pi 3](https://www.adafruit.com/product/3055)
 - [Raspberry Pi 3 Power Adapter](https://www.adafruit.com/product/1995)
 - [PiTFT 320x240 2.8" Resistive Touchscreen](https://www.adafruit.com/product/2298)
-- [USB WiFi Dongle](https://www.amazon.com/gp/product/B018LHT6R6/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+- ~~[USB WiFi Dongle](https://www.amazon.com/gp/product/B018LHT6R6/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)~~ (turns out the Pi 3's got built in WiFi)
 - [Case Base and Faceplate Pack](https://www.adafruit.com/product/3062) (optional)
 
 # raspberry pi setup
@@ -94,6 +94,14 @@ pm2 stop server
 then make sure pm2 itself starts on startup, if u run `pm2 startup` it will tell u to run:
 ```
 sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+```
+
+### prevent screen blanking
+
+by default the screen will go blank after about 10 mins of no user input. u can just tap the screen to bring it back, but that kind of kills the whole digital picture frame vibe. so to disable this run `sudo nano /etc/lightdm/lightdm.conf`, scroll to the bottom and include in that file the following:
+```
+[SeatDefaults]
+xserver-command=X -s 0 -dpms
 ```
 
 ### install TeamViewer
