@@ -28,8 +28,8 @@ function setup(arg){
     createButton(gui,'run-updates')
     if(arg.includes('pm2')) createButton(gui,'restart-app')
     createButton(gui,'quit-app')
-    createButton(gui,'restart-computer')
-    createButton(gui,'poweroff')
+    // createButton(gui,'restart-computer')
+    // createButton(gui,'poweroff')
     createButton(gui,'close-menu',()=>{
         gui.style.display = "none"
     })
